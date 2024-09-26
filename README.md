@@ -1,12 +1,8 @@
-# Chirp-GPT
+# Chirp-Claude
 
-Make Chat-GPT talk with a high pitched voice as it's typing
+Make Claude talk with a high pitched voice as it's typing ([Fork of merlin-ka/chirp-gpt](https://github.com/merlin-ka/chirp-gpt/))
 
-## Demo
-
-https://github.com/merlin-ka/chirp-gpt/assets/21295445/35d043d2-a536-493f-b765-6441dcaa3d6e
-
-## [Click here to install](https://raw.githubusercontent.com/merlin-ka/chirp-gpt/main/chirp-gpt.user.js)
+## [Click here to install](https://raw.githubusercontent.com/theKlanc/chirp-claude/main/chirp-claude.user.js)
 
 An extension for running user scripts is required.
 Tested with Tampermonkey and Firefox.
