@@ -20,7 +20,7 @@ gain.gain.value = 0.5;
 gain.connect(audioContext.destination);
 
 function createUi() {
-    const header = document.getElementsByClassName("sticky top-0 z-10 -mb-6 flex h-14 items-center gap-3 pl-11 pr-2 md:pb-0.5 md:pl-6")[0];
+    const header = document.querySelector("button[data-testid=\"conversation-star-button\"]");
     if (!header) {
         return;
     }
@@ -42,8 +42,7 @@ function createUi() {
     slider.addEventListener("input", (e) => {
         gain.gain.value = slider.valueAsNumber / 100;
     });
-
-    document.getElementsByClassName("right-3 flex gap-2 md:absolute")[0].insertAdjacentElement("beforebegin", div);
+    document.querySelector("button[data-testid=\"conversation-star-button\"]").insertAdjacentElement("beforebegin", div);
 }
 
 async function createAudioBuffer(waveBase64) {
@@ -95,11 +94,12 @@ async function main() {
         }*/
 
         // check for new content
-        const chatelem = document.getElementsByClassName("flex-1  flex  flex-col  gap-3  px-4  max-w-3xl  mx-auto  w-full pt-1")[0]
-        if (!chatelem){
+
+        const chatelems = [...document.querySelectorAll("div[data-is-streaming]")]
+        if (!chatelems){
             return;
         }
-        const newlen = chatelem.innerText.length;
+        const newlen = chatelems.map(p=>p.innerText).reduce((a,b)=>a+b).length;
 
         if (newlen == previousResponseLength) {
             return;
