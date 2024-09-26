@@ -43,7 +43,7 @@ function createUi() {
         gain.gain.value = slider.valueAsNumber / 100;
     });
 
-    accountButton.insertAdjacentElement("beforebegin", div);
+    document.getElementsByClassName("right-3 flex gap-2 md:absolute")[0].insertAdjacentElement("beforebegin", div);
 }
 
 async function createAudioBuffer(waveBase64) {
@@ -95,7 +95,12 @@ async function main() {
         }*/
 
         // check for new content
-        const newlen = document.getElementsByClassName("flex-1  flex  flex-col  gap-3  px-4  max-w-3xl  mx-auto  w-full pt-1")[0].innerText.length;
+        const chatelem = document.getElementsByClassName("flex-1  flex  flex-col  gap-3  px-4  max-w-3xl  mx-auto  w-full pt-1")[0]
+        if (!chatelem){
+            return;
+        }
+        const newlen = chatelem.innerText.length;
+
         if (newlen == previousResponseLength) {
             return;
         }
@@ -110,6 +115,7 @@ async function main() {
 
         const idx = Math.round(Math.random() * (sounds.length - 1));
         playAudioBuffer(sounds[idx]);
+        console.log("po");
     });
 
     observer.observe(document.body, { characterData: true, childList: true, subtree: true });
