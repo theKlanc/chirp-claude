@@ -1,14 +1,14 @@
 // ==UserScript==
-// @name         Chirp-GPT
+// @name         Chirp-Claude
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  Make Chat-GPT talk with a funny voice.
+// @description  Make Claude talk with a funny voice.
 // @author       merlin-ka (github.com/merlin-ka)
-// @match        https://chatgpt.com/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=chatgpt.com
+// @match        https://claude.ai/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=claude.ai
 // @grant        none
-// @downloadUrl  https://raw.githubusercontent.com/merlin-ka/chirp-gpt/main/chirp-gpt.user.js
-// @updateUrl    https://raw.githubusercontent.com/merlin-ka/chirp-gpt/main/chirp-gpt.user.js
+// @downloadUrl  https://raw.githubusercontent.com/theKlanc/chirp-claude/main/chirp-claude.user.js
+// @updateUrl    https://raw.githubusercontent.com/theKlanc/chirp-claude/main/chirp-claude.user.js
 // ==/UserScript==
 
 const PLAY_INTERVAL = 75;
@@ -31,11 +31,11 @@ function createUi() {
     }
 
     const div = document.createElement("div");
-    div.id = "chirp-gpt-ui";
+    div.id = "chirp-claude-ui";
     div.className = "flex items-center";
 
     const label = document.createElement("div");
-    label.innerText = "Chirp-GPT Volume:";
+    label.innerText = "Chirp-Claude Volume:";
     label.style.marginRight = "16px";
     div.appendChild(label);
 
@@ -83,7 +83,7 @@ async function main() {
     const observer = new MutationObserver(() => {
         // first, check if the UI is visible
         // (which is not the case on page load and chat navigation)
-        if (document.querySelector("#chirp-gpt-ui") == null) {
+        if (document.querySelector("#chirp-claude-ui") == null) {
             createUi();
         }
 
@@ -92,18 +92,18 @@ async function main() {
         }
 
         /** @type {HTMLDivElement} */
-        const resultStreamingDiv = document.querySelector("div.result-streaming");
+        //const resultStreamingDiv = document.querySelector("div.result-streaming");
 
-        if (!resultStreamingDiv) {
+        /*if (!resultStreamingDiv) {
             previousResponseLength = 0;
             return;
-        }
+        }*/
 
         // check for new content
-        if (resultStreamingDiv.innerText.length == previousResponseLength) {
+        if (document.getElementsByClassName("flex-1  flex  flex-col  gap-3  px-4  max-w-3xl  mx-auto  w-full pt-1")[0].innerText.length == previousResponseLength) {
             return;
         }
-        previousResponseLength = resultStreamingDiv.innerText.length;
+        previousResponseLength = document.getElementsByClassName("flex-1  flex  flex-col  gap-3  px-4  max-w-3xl  mx-auto  w-full pt-1")[0].innerText.length;
 
         // prevent sounds from overlapping too much
         const now = Date.now();
