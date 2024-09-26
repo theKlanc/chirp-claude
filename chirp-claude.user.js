@@ -20,13 +20,8 @@ gain.gain.value = 0.5;
 gain.connect(audioContext.destination);
 
 function createUi() {
-    const header = document.querySelector("main div.sticky");
+    const header = document.getElementsByClassName("sticky top-0 z-10 -mb-6 flex h-14 items-center gap-3 pl-11 pr-2 md:pb-0.5 md:pl-6")[0];
     if (!header) {
-        return;
-    }
-
-    const accountButton = header.children[header.children.length - 1];
-    if (!accountButton) {
         return;
     }
 
@@ -100,10 +95,11 @@ async function main() {
         }*/
 
         // check for new content
-        if (document.getElementsByClassName("flex-1  flex  flex-col  gap-3  px-4  max-w-3xl  mx-auto  w-full pt-1")[0].innerText.length == previousResponseLength) {
+        const newlen = document.getElementsByClassName("flex-1  flex  flex-col  gap-3  px-4  max-w-3xl  mx-auto  w-full pt-1")[0].innerText.length;
+        if (newlen == previousResponseLength) {
             return;
         }
-        previousResponseLength = document.getElementsByClassName("flex-1  flex  flex-col  gap-3  px-4  max-w-3xl  mx-auto  w-full pt-1")[0].innerText.length;
+        previousResponseLength = newlen;
 
         // prevent sounds from overlapping too much
         const now = Date.now();
